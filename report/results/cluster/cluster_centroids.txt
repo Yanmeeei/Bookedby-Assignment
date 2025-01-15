@@ -1,16 +1,17 @@
-Cluster centroids
+
+
+
    TotalSpending  PurchaseFrequency   Recency
-0       2.070763           1.315487 -0.537468   # Best customers:
-                                                    High spenders with recent and frequent activities.
-1      -0.989785          -1.181983 -0.187385   # New customers:
-                                                    Low total spending, low frequency, relatively recent activity.
-2      -0.201325          -0.126115 -0.445660   # Active occasional buyers:
-                                                    Frequent buyers compared to new customers, but haven't spent a lot.
-                                                    Have a potential to become loyal customers.
-3      -1.114938          -1.315776  2.196268   # Occasional buyers at risk:
-                                                    Used to be occasional/first-time buyers, but stopped activity for a while.
-4       0.453723           0.825323 -0.512306   # Active, loyal customers:
+0      -1.096062          -1.417278  2.765874   # Occasional buyers at risk:
+                                                    Used to be occasional/first-time buyers,
+                                                    but stopped activity for a while.
+1       0.197671           0.497839 -0.393358   # Active, loyal customers:
                                                     Frequent buyers who are willing to spend money.
-                                                    Have with a potential to become the best customers
-5       0.492679           0.462460  1.881354   # High spenders at risk:
-                                                    Used to spend a lot but stopped activity for a while.
+                                                    Have with a potential to become High Spenders.
+2       1.907547           1.202705 -0.349152   # High Spenders:
+                                                    High spenders with recent and frequent activities.
+3      -0.911482          -1.130578  0.109797   # Occasional/New customers:
+                                                    Low total spending, low frequency,
+                                                    with relatively recent activity.
+
+

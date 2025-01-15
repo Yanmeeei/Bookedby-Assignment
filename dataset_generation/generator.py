@@ -59,7 +59,7 @@ def generate(
             purchase_date = fake.date_between(start_date=date(2024, 1, 1), end_date=date(2024, 10, 31))
 
         if cid in lost_customers:
-            purchase_date = fake.date_between(start_date=date(2024, 1, 1), end_date=date(2024, 5, 31))
+            purchase_date = fake.date_between(start_date=date(2024, 1, 1), end_date=date(2024, 10, 31))
 
         data.append({
             "PurchaseID": f"PU{str(purchase_id).zfill(5)}",

@@ -3,13 +3,13 @@ import logging
 import shutil
 import os
 
-from config import DATASET_PATH, PRODUCTS_PATH, DEFAULT_NUM_PRODUCTS, DEFAULT_NUM_CUSTOMERS, DEFAULT_NUM_ENTRIES, \
+from config import DATASET_PATH, PRODUCTS_PATH, DEFAULT_NUM_PRODUCTS, DEFAULT_NUM_CUSTOMERS, \
     DEFAULT_NUM_CLUSTERS, DEFAULT_NUM_CATEGORY, DEFAULT_NUM_PRODUCT
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 
-def generate_data(product_path, num_products, num_customers, num_entries):
+def generate_data(product_path, num_products, num_customers):
     logging.info("Starting data generation...")
     from dataset_generation.generate_products import generate_products
     from dataset_generation.generator import generate
@@ -18,7 +18,7 @@ def generate_data(product_path, num_products, num_customers, num_entries):
         logging.info("Product file not found. Generating products...")
         generate_products(num_products)
 
-    generate(product_path=product_path, num_customers=num_customers, num_entries=num_entries)
+    generate(product_path=product_path, num_customers=num_customers)
     logging.info("Data generation completed.")
 
 
@@ -110,7 +110,7 @@ def run_all(overwrite_data):
     """
     try:
         if not os.path.exists(DATASET_PATH) or not overwrite_data:
-            generate_data(PRODUCTS_PATH, DEFAULT_NUM_PRODUCTS, DEFAULT_NUM_CUSTOMERS, DEFAULT_NUM_ENTRIES)
+            generate_data(PRODUCTS_PATH, DEFAULT_NUM_PRODUCTS, DEFAULT_NUM_CUSTOMERS)
         perform_data_analysis()
         prepare_clustering_data()
         perform_elbow_check()
@@ -137,13 +137,11 @@ def main():
     # Subcommand: generate_data
     generate_parser = subparsers.add_parser("generate", help="Generate synthetic data")
     generate_parser.add_argument("-p", "--product_path", type=str, default=PRODUCTS_PATH,
-                                 help="Path to the products list CSV (default=data/products.csv)")
+                                 help=f"Path to the products list CSV (default={PRODUCTS_PATH})")
     generate_parser.add_argument("-np", "--num_products", type=int, default=DEFAULT_NUM_PRODUCTS,
-                                 help="Number of products to generate (default=80)")
+                                 help=f"Number of products to generate (default={DEFAULT_NUM_PRODUCTS})")
     generate_parser.add_argument("-nc", "--num_customers", type=int, default=DEFAULT_NUM_CUSTOMERS,
-                                 help="Number of customers to generate (default=500)")
-    generate_parser.add_argument("-ne", "--num_entries", type=int, default=DEFAULT_NUM_ENTRIES,
-                                 help="Number of purchase entries to generate (default=5000)")
+                                 help=f"Number of customers to generate (default={DEFAULT_NUM_CUSTOMERS})")
 
     # Subcommand: data_analysis
     generate_parser = subparsers.add_parser("analyze", help="Perform data analysis")
@@ -156,7 +154,7 @@ def main():
                                                           help="Perform Elbow check for suitable number of clusters")
     k_means_cluster_parser = clustering_subparsers.add_parser("kmeans", help="Perform K-means clustering")
     k_means_cluster_parser.add_argument("-c", "--num_clusters", type=int, default=DEFAULT_NUM_CLUSTERS,
-                                        help="Number of clusters (default=6)")
+                                        help=f"Number of clusters (default={DEFAULT_NUM_CLUSTERS})")
 
     # Subcommand: Recommendation
     recommendation_parser = subparsers.add_parser("recommendation", help="Recommendation-related commands")
@@ -174,9 +172,9 @@ def main():
     content_based_filtering_parser.add_argument("-cid", "--customer_id", required=True, type=str,
                                                 help="Customer ID (format: C001~C500 (or max number of customers) for existing customers, C000 for new customers)")
     content_based_filtering_parser.add_argument("-nc", "--num_category", type=int, default=DEFAULT_NUM_CATEGORY,
-                                                help="number of categories to recommend (default=2)")
+                                                help=f"number of categories to recommend (default={DEFAULT_NUM_CATEGORY})")
     content_based_filtering_parser.add_argument("-np", "--num_product", type=int, default=DEFAULT_NUM_PRODUCT,
-                                                help="Number of recommended products in each category (default=3)")
+                                                help=f"Number of recommended products in each category (default={DEFAULT_NUM_PRODUCT})")
 
     content_based_filtering_all_parser = recommendation_subparser.add_parser("content-filter-all", help="Get recommendations for all customers")
 
@@ -189,7 +187,7 @@ def main():
     elif args.command == "clear-all":
         clear_all()
     elif args.command == "generate":
-        generate_data(args.product_path, args.num_products, args.num_customers, args.num_entries)
+        generate_data(args.product_path, args.num_products, args.num_customers)
     elif args.command == "analyze":
         perform_data_analysis()
     elif args.command == "clustering":

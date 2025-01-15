@@ -129,8 +129,8 @@ python3 cli.py recommendation content-filter -cid <customer_id> -nc <num_categor
 ```
 Options:
 - `-cid`, `--customer_id`: Customer ID (e.g., `C001`, `C124`, or `C000` for new customers).
-- `-nc`, `--num_category`: Number of categories to recommend (default: 3).
-- `-np`, `--num_product`: Number of products per category to recommend (default: 1).
+- `-nc`, `--num_category`: Number of categories to recommend (default: 2).
+- `-np`, `--num_product`: Number of products per category to recommend (default: 2).
 
 The results will be print to the console AND saved in `REC_OUTPUT_PATH`.
 
