@@ -76,7 +76,8 @@ Options:
 - `-p`, `--product_path`: Path to the products list CSV (default: `data/products.csv`).
 - `-np`, `--num_products`: Number of products to generate (default: 80).
 - `-nc`, `--num_customers`: Number of customers to generate (default: 500).
-- `-ne`, `--num_entries`: Number of purchase entries to generate (default: 5000).
+
+The CLI aims to generate >5000 purchase records to satisfy the assignment requirement. However, due to the effort to realistically simulate customer purchasing behaviour, the exact number of records cannot be pre-set before generation. Current setting will generate around 5300 records, which is enough for the purpose of this assignent. 
 
 The generated data will be saved in `DATA_PATH`.
 
