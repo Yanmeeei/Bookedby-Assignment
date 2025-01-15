@@ -12,7 +12,7 @@ from dataset_generation.generate_products import price_ranges
 def generate(
         product_path=PRODUCTS_PATH,
         num_customers= 500,
-        num_entries=7000,  # for generating > 5000 entries
+        num_entries=7000,  # for generating ~= 5300 entries
         high_spender_ratio=0.1,
         occasional_ratio=0.3,
         lost_ratio=0.1
@@ -47,8 +47,9 @@ def generate(
             purchase_amount = round(random.uniform(*price_ranges[category]) * 2, 2)  # Higher spending
         elif cid in occasional_customers:
             purchase_amount = round(random.uniform(*price_ranges[category]), 2)
+            # Occasional customers have 80% less purchase records compared to normal customers
             if random.random() > 0.2:
-                continue  # Skip adding this purchase for occasional customers
+                continue  # stop adding this purchase
         else:
             purchase_amount = round(random.uniform(*price_ranges[category]), 2)
 

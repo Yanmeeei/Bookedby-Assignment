@@ -7,10 +7,10 @@ from config import DATASET_PATH, CLUSTER_TEMP_PATH
 
 def feature_scaling(df):
     """
-    Prepare and aggregate customer data for clustering by extracting relevant features.
+    Prepare customer data for clustering by extracting RFM features.
     """
 
-    # Generate features per customer (simple RFM features)
+    # Extract RFM features from customers
     df['PurchaseDate'] = pd.to_datetime(df['PurchaseDate'])
     customer_data = df.groupby('CustomerID').agg(
         TotalSpending=('PurchaseAmount', 'sum'),

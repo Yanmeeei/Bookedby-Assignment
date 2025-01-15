@@ -29,7 +29,7 @@ def kmeans(data, n_clusters: int = 5):
     print(">>> Cluster centroids saved at " + str(CLUSTER_OUTPUT_PATH / 'cluster_centroids.csv'))
     visualization_3d(data, features, centroids)
 
-    # Compute silhouette score for validation
+    # Compute silhouette score
     score = silhouette_score(feature_data, data['Cluster'])
     plot_silhouette(feature_data.values, data['Cluster'].values, n_clusters)
 
