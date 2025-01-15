@@ -8,17 +8,17 @@
 This recommendation CLI aims to generate synthetic data, analyze data, perform clustering, and provide simple AI-based product recommendations based on customer's purchase history.
 
 ## Functionalities
-- **Data Generation:** 
+- **Data Generation** 
   - Generate synthetic product purchase data.
-- **Data Analysis:** 
+- **Data Analysis** 
   - Analyze the generated dataset for preliminary insights.
-- **Clustering:** 
+- **Clustering** 
   - Perform K-means clustering with Silhouette evaluation. Also provides distortion analysis to determine the best number of clusters.  
-- **Recommendation:** 
+- **Recommendation** 
   - Generate recommendations (including one novel product to uncover new preferences) using content-based filtering.
-- **Run All:** 
+- **Run All** 
   - Run the aforementioned functionalities using the default configuration.
-- **Clear All:** 
+- **Clear All** 
   - Clear all generated and intermediate data.
 
 ## Prerequisites
@@ -101,7 +101,7 @@ The generated distortion graph will be saved in `CLUSTER_OUTPUT_PATH`.
 python3 cli.py clustering kmeans -c <num_clusters>
 ```
 Options:
-- `-c`, `--num_clusters`: Number of clusters (default: 5).
+- `-c`, `--num_clusters`: Number of clusters (default: 6).
 
 The results of `kmeans` will be saved in `CLUSTER_OUTPUT_PATH`, including:
 - A clustered dataset
@@ -122,7 +122,7 @@ python3 cli.py recommendation check-density
 python3 cli.py recommendation prepare -m <method>
 ```
 Options:
-- `-m`, `--method`: Data preparation method (`nlp` or `pairwise`).
+- `-m`, `--method`: Data preparation method (`nlp` (recommended) or `pairwise`).
 ```bash
 # Perform Content-Based Recommendation for Specified Customer.
 python3 cli.py recommendation content-filter -cid <customer_id> -nc <num_category> -np <num_product>

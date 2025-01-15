@@ -19,7 +19,7 @@ def recommend(data, similarity_matrix, pid_to_sm_row, product_metadata, cid, top
     category_purchase_cnt = Counter(purchased_categories)
     top_categories = [cat for cat, _ in category_purchase_cnt.most_common(top_c)]
 
-    # For each top category in the same category, find recommendations and their similarity score.
+    # For each of the top categories, find recommendations and their similarity score.
     recommendations = {}
     for c in top_categories:
         for pid in purchased_products:
@@ -113,7 +113,7 @@ def load_files():
     return similarity_matrix, pid_to_smid, product_metadata, products_df
 
 
-def run(customer_id, top_categories=3, top_n=1):
+def run(customer_id, top_categories=2, top_n=3):
     """
     Generate recommendations for a specified customer.
     """
@@ -175,7 +175,7 @@ def run(customer_id, top_categories=3, top_n=1):
     print("Recommendations done! Results are saved at ", REC_OUTPUT_PATH)
 
 
-def run_all(top_categories=3, top_n=1):
+def run_all(top_categories=2, top_n=3):
     """
     Generate recommendations for all customers.
     """

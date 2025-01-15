@@ -1,0 +1,25 @@
+Top 5 Selling Products by Sell Amount:
+ProductDescription
+Standing Desk           20453.47
+Home Security Camera    18388.44
+Bluetooth Speaker       18131.80
+Bed Frame               16755.19
+Wardrobe                16210.61
+
+Top 5 Selling Products by Sell Count:
+ProductDescription
+Toy Train Set     67
+Standing Desk     62
+Sunglasses        59
+Food Processor    59
+Umbrella          58
+
+Top 5 Selling Categories:
+ProductCategory
+Home & Furniture           174738.07
+Tech & Electronics         172134.93
+Kitchen & Appliances        86062.02
+Fitness & Sports            61736.62
+Accessories & Lifestyle     53315.39
+
+Average Spending Per Customer: $1267.81

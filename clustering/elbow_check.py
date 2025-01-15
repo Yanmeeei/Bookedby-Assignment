@@ -19,7 +19,7 @@ def elbow_method(data):
         distortions.append(kmeans.inertia_)
 
     # Plot the results
-    plt.figure(figsize=(8, 6))
+    plt.figure(figsize=(4, 4))
     plt.plot(range(1, 10), distortions, marker='o')
     plt.title('Distortions for different numbers of clusters')
     plt.xlabel('Number of Clusters')

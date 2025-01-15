@@ -10,30 +10,30 @@ import numpy as np
 from config import CLUSTER_OUTPUT_PATH, CLUSTER_TEMP_PATH
 
 
-def kmeans(prepared_data, n_clusters: int = 5):
+def kmeans(data, n_clusters: int = 5):
     """
     Perform k-means clustering on the given dataset.
     Calculate the silhouette score, creates a silhouette plot and an interactive 3D scatter plot.
     """
 
     features = ['TotalSpending', 'PurchaseFrequency', 'Recency']  # Use RFM features
-    data = prepared_data[features]
+    feature_data = data[features]
 
     # Apply k-means cluster
     kmeans = KMeans(n_clusters=n_clusters, random_state=42)
-    prepared_data['Cluster'] = kmeans.fit_predict(data)
+    data['Cluster'] = kmeans.fit_predict(feature_data)
     centroids = pd.DataFrame(kmeans.cluster_centers_, columns=features)
 
-    with open(CLUSTER_OUTPUT_PATH / 'cluster_centroids.csv', 'w') as f:
+    with open(CLUSTER_OUTPUT_PATH / 'cluster_centroids.txt', 'w') as f:
         f.write(str(centroids))
     print(">>> Cluster centroids saved at " + str(CLUSTER_OUTPUT_PATH / 'cluster_centroids.csv'))
-    visualization_3d(prepared_data, features, centroids)
+    visualization_3d(data, features, centroids)
 
     # Compute silhouette score for validation
-    score = silhouette_score(data, prepared_data['Cluster'])
-    plot_silhouette(data.values, prepared_data['Cluster'].values, n_clusters)
+    score = silhouette_score(feature_data, data['Cluster'])
+    plot_silhouette(feature_data.values, data['Cluster'].values, n_clusters)
 
-    return prepared_data, score
+    return data, score
 
 
 def visualization_3d(data, features, centroids=None):
@@ -72,6 +72,29 @@ def visualization_3d(data, features, centroids=None):
                 "<extra></extra>"
             )
         )
+
+    note = (
+        "Note:\n"
+        "- Smaller values for TotalSpending and PurchaseFrequency indicate less spending/frequency.\n"
+        "- Smaller values for Recency indicate more recent activity.\n"
+    )
+
+    fig.update_layout(
+        annotations=[
+            dict(
+                text=note,
+                xref="paper",
+                yref="paper",
+                x=0.5,
+                y=0,
+                showarrow=False,
+                font=dict(size=14, color="black"),
+                align="left",
+                xanchor="center",
+                yanchor="top"
+            )
+        ]
+    )
 
     output_file = CLUSTER_OUTPUT_PATH / 'k_means_visualization.html'
     fig.write_html(output_file)
@@ -112,7 +135,7 @@ def plot_silhouette(prepared_data, labels, n_clusters):
     print(">>> Silhouette plot saved at " + str(CLUSTER_OUTPUT_PATH / 'silhouette_score.png'))
 
 
-def run(n_clusters=5):
+def run(n_clusters=6):
     try:
         prepared_data = pd.read_csv(CLUSTER_TEMP_PATH / 'scaled_features.csv')
     except FileNotFoundError:

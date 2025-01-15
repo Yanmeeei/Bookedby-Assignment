@@ -79,6 +79,9 @@ def perform_content_based_recommendation_all():
 
 
 def clear_all():
+    """
+    Clear all data, results and intermediate data.
+    """
     logging.info("Clearing all data & intermediate results...")
     from config import DATA_PATH, OUTPUT_PATH, RECOMMENDATION_TEMP_PATH, CLUSTER_TEMP_PATH
     paths_to_clear = [
@@ -101,6 +104,10 @@ def clear_all():
 
 
 def run_all(overwrite_data):
+    """
+    Run data generation, clustering, elbow check, k-means clustering, density check and recommendation
+    using default config.
+    """
     try:
         if not os.path.exists(DATASET_PATH) or not overwrite_data:
             generate_data(PRODUCTS_PATH, DEFAULT_NUM_PRODUCTS, DEFAULT_NUM_CUSTOMERS, DEFAULT_NUM_ENTRIES)
@@ -116,6 +123,9 @@ def run_all(overwrite_data):
 
 
 def main():
+    """
+    The entry point for this CLI.
+    """
     parser = argparse.ArgumentParser(description="Yanmei's Recommendation CLI")
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
 
@@ -146,7 +156,7 @@ def main():
                                                           help="Perform Elbow check for suitable number of clusters")
     k_means_cluster_parser = clustering_subparsers.add_parser("kmeans", help="Perform K-means clustering")
     k_means_cluster_parser.add_argument("-c", "--num_clusters", type=int, default=DEFAULT_NUM_CLUSTERS,
-                                        help="Number of clusters (default=5)")
+                                        help="Number of clusters (default=6)")
 
     # Subcommand: Recommendation
     recommendation_parser = subparsers.add_parser("recommendation", help="Recommendation-related commands")
@@ -164,9 +174,9 @@ def main():
     content_based_filtering_parser.add_argument("-cid", "--customer_id", required=True, type=str,
                                                 help="Customer ID (format: C001~C500 (or max number of customers) for existing customers, C000 for new customers)")
     content_based_filtering_parser.add_argument("-nc", "--num_category", type=int, default=DEFAULT_NUM_CATEGORY,
-                                                help="number of categories to recommend (default=3)")
+                                                help="number of categories to recommend (default=2)")
     content_based_filtering_parser.add_argument("-np", "--num_product", type=int, default=DEFAULT_NUM_PRODUCT,
-                                                help="Number of recommended products in each category (default=1)")
+                                                help="Number of recommended products in each category (default=3)")
 
     content_based_filtering_all_parser = recommendation_subparser.add_parser("content-filter-all", help="Get recommendations for all customers")
 

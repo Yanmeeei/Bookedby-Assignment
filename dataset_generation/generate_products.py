@@ -69,8 +69,8 @@ def generate_products(num_products: int = 80):
     products = []
     pid = 1
 
-    for category, products in categories.items():
-        for product in products:
+    for category, products_list in categories.items():
+        for product in products_list:
             products.append({
                 "ProductID": f"P{str(pid).zfill(len(str(num_products)))}",
                 "ProductDescription": product,
