@@ -23,21 +23,20 @@ This recommendation CLI aims to generate synthetic data, analyze data, perform c
 
 ## Prerequisites
 - Python 3.7+ (Developed in Python 3.9)
-- Project dependencies are listed in `requirements_arm.txt` and `requirements_intel.txt`
+- Project dependencies are listed in `requirements_arm64.txt` and `requirements_intel.txt`
 
 ## Installation
-1. Clone the repository from GitHub
-2. (Optional but strongly recommended) Setup Python virtual environment 
+1. Clone the repository from GitHub.
+2. (Optional but strongly recommended) Setup Python virtual environment .
 3. Install the required dependencies:
    ```bash
    # For ARM64 machines
    pip install -r requirements_arm64.txt
    
-   # For x86 machines
+   # For intel machines
    pip install -r requirements_intel.txt
    ```
-4. Review [config.py](config.py)
-   - Ensure the paths and default values in `config.py` are correctly configured.
+4. Review the paths and default values in [config.py](config.py).
 
 ## Commands
 
